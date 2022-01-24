@@ -1,44 +1,27 @@
-import { Button } from "bootstrap";
 import React, { useState, useEffect } from "react";
-import { Card, Row, Col } from "react-bootstrap";
-import "./items.css";
+import { Row, Col } from "react-bootstrap";
 import axios from "axios";
+import ProductCard from "./productCard";
 
 function Items() {
   const url = "https://61cebbc465c32600170c7ce8.mockapi.io/products";
-  const [products, setproducts] = useState(null);
+  const [products, setproducts] = useState([]);
 
   useEffect(() => {
-    return () => {
-      axios.get(url).then((response) => {
-        setproducts(response.data);
-      });
-    };
+    axios.get(url).then((response) => {
+      setproducts(response.data);
+    });
   }, [url]);
 
-  if (products) {
+  if (products && products.length !== 0) {
     return (
       <>
         <div style={{ margin: "3rem 8rem" }}>
-        <h1 style={{marginBottom:'2rem'}}> Products Page</h1>
+          <h1 style={{ marginBottom: "4rem" }}> Products Page</h1>
           <Row xs={1} md={4} className="g-4">
             {products.map((product, idx) => (
               <Col>
-                <Card className="card" key={idx}>
-                  <Card.Img
-                    variant="top"
-                    src={product.image}
-                    style={{ borderRadius: "30px 30px 0 0" }}
-                  />
-                  <Card.Body className="card-body">
-                    <Card.Title>{product.name}</Card.Title>
-                    <Card.Text>{product.description}</Card.Text>
-                    <Card.Text style={{ fontSize: "2rem", color: "blue" }}>
-                      {product.price}$
-                    </Card.Text>
-                    <h4>Buy Now</h4>
-                  </Card.Body>
-                </Card>
+                <ProductCard product={product} />
               </Col>
             ))}
           </Row>
