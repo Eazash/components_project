@@ -9,14 +9,12 @@ function Items() {
   const [products, setproducts] = useState(null);
 
   useEffect(() => {
-    return () => {
-      axios.get(url).then((response) => {
-        setproducts(response.data);
-      });
-    };
+    axios.get(url).then((response) => {
+      setproducts(response.data);
+    });
   }, [url]);
 
-  if (products) {
+  if (products && products.length !== 0) {
     return (
       <>
         <div style={{ margin: "3rem 8rem" }}>
