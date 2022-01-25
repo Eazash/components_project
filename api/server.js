@@ -6,7 +6,7 @@ const yaml = require("js-yaml");
 const fs = require("fs");
 const path = require("path");
 const swaggerUI = require("swagger-ui-express");
-
+const mainRouter = require("./routes/main.js");
 const API_PORT = process.env.API_PORT || 3000;
 const DB_URL = "mongodb://localhost:27017/ecommerce";
 
@@ -56,6 +56,9 @@ app.use(function (error, req, res, next) {
   }
   return res.status(500);
 });
+
+// register routes
+mainRouter.init(app);
 
 // start the server
 const server = app.listen(API_PORT, "localhost", function () {
