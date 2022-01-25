@@ -2,10 +2,24 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const yaml = require("js-yaml");
+const fs = require("fs");
+const path = require("path");
+const swaggerUI = require("swagger-ui-express");
 
 const API_PORT = process.env.API_PORT || 3000;
 const DB_URL = "mongodb://localhost:27017/ecommerce";
 
+// load swagger yaml file
+let swaggerDoc;
+try {
+  swaggerDoc = yaml.load(
+    fs.readFileSync(path.join(process.cwd(), "swagger.yaml"))
+  );
+} catch (error) {
+  console.error(error);
+  process.exit(1);
+}
 // connect to database
 mongoose
   .connect(DB_URL, {
@@ -44,4 +58,15 @@ app.use(function (error, req, res, next) {
 });
 
 // start the server
-app.listen(API_PORT, () => console.log(`API running on port ${API_PORT}`));
+const server = app.listen(API_PORT, "localhost", function () {
+  const { address, port } = server.address();
+  console.log(`API running at http://${address}:${port}/api`);
+
+  // setup Swagger while not in production
+  if (process.env.NODE_ENV !== "production") {
+    app.use("/explorer", swaggerUI.serve, swaggerUI.setup(swaggerDoc));
+    console.log(
+      `API Documentation running at http://${address}:${port}/explorer`
+    );
+  }
+});
