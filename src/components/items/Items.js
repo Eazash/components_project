@@ -13,6 +13,15 @@ function Items() {
     });
   }, [url]);
 
+  const postDelete =id=> {
+    axios
+      .delete(`https://61cebbc465c32600170c7ce8.mockapi.io/products/${id}`)
+      .then((res) => axios.get(`https://61cebbc465c32600170c7ce8.mockapi.io/products`).then((response) => {
+        setproducts(response.data);
+      }))
+      .catch((err) => console.log(err));
+  };
+
   if (products && products.length !== 0) {
     return (
       <>
@@ -20,8 +29,8 @@ function Items() {
           <h1 style={{ marginBottom: "4rem" }}> Products Page</h1>
           <Row xs={1} md={4} className="g-4">
             {products.map((product, idx) => (
-              <Col>
-                <ProductCard product={product} />
+              <Col key={idx}>
+                <ProductCard product={product} postDelete={postDelete}/>
               </Col>
             ))}
           </Row>
