@@ -1,4 +1,4 @@
-import { Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import "./productCard.css";
 
 export default function ProductCard({ product }) {
@@ -15,7 +15,7 @@ export default function ProductCard({ product }) {
         <Card.Text style={{ fontSize: "2rem", color: "blue" }}>
           {product.price}$
         </Card.Text>
-        <h4>Buy Now</h4>
+        <Button color='error'>Buy Now</Button>
       </Card.Body>
     </Card>
   );
