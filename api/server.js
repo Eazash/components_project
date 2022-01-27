@@ -6,9 +6,10 @@ const yaml = require("js-yaml");
 const fs = require("fs");
 const path = require("path");
 const swaggerUI = require("swagger-ui-express");
-const mainRouter = require("./routes/main.js");
-const API_PORT = process.env.API_PORT || 3000;
-const DB_URL = "mongodb://localhost:27017/ecommerce";
+const mainRouter = require("./routes/mainRouter.js");
+const config = require("./config");
+const API_PORT = config.api_port || 3000;
+const DB_URL = config.mongo_url;
 
 // load swagger yaml file
 let swaggerDoc;
@@ -32,15 +33,13 @@ mongoose
     process.exit(1);
   });
 
-require("dotenv").config();
-
 const app = express();
 
 // use cors
 app.use(cors());
 
 // enable json
-app.use(express.json({ exnteded: true }));
+app.use(express.json({ extended: true }));
 
 // setup logger
 app.use(morgan("dev"));
