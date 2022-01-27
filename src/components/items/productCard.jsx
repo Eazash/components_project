@@ -1,7 +1,10 @@
 import { Button, Card } from "react-bootstrap";
 import "./productCard.css";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({product,postDelete}) {
+  const onDelete =id=>e => {
+    postDelete(id); 
+  };
   return (
     <Card className="card" key={product.id}>
       <Card.Img
@@ -15,7 +18,9 @@ export default function ProductCard({ product }) {
         <Card.Text style={{ fontSize: "2rem", color: "blue" }}>
           {product.price}$
         </Card.Text>
-        <Button color='error'>Buy Now</Button>
+        <Button color="error" onClick={onDelete(product.id)}>
+          Delete
+        </Button>
       </Card.Body>
     </Card>
   );
