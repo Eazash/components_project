@@ -16,5 +16,5 @@ database.on('error', console.error.bind(console, 'Connection error: '));
 database.once('open', () => console.log('Connected to the Database!'));
 
 module.exports = {
-    User: require("./models/userModel")
+    User: require("../models/userModel")
 };
