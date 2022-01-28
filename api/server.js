@@ -41,6 +41,9 @@ app.use(morgan("dev"));
 // connect to database
 app.bind(database);
 
+// register routes
+mainRouter.init(app);
+
 // add error handler
 app.use(function (error, req, res, next) {
 	if (error.statusCode !== undefined) {
@@ -52,9 +55,6 @@ app.use(function (error, req, res, next) {
 	}
 	return res.status(500);
 });
-
-// register routes
-mainRouter.init(app);
 
 // start the server
 const server = app.listen(config.api_port, "localhost", function () {
