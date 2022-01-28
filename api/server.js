@@ -5,9 +5,11 @@ const yaml = require("js-yaml");
 const fs = require("fs");
 const path = require("path");
 const swaggerUI = require("swagger-ui-express");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const mainRouter = require("./routes/mainRouter.js");
-const config = require("./config");
-const database = require("./database");
+const config = require("./config/config");
+const database = require("./config/database");
 
 // load swagger yaml file
 let swaggerDoc;
@@ -25,8 +27,13 @@ const app = express();
 // use cors
 app.use(cors());
 
+app.use(bodyParser.urlencoded({ extended: false }));
+
 // enable json
-app.use(express.json({ extended: true }));
+app.use(bodyParser.json());
+
+//enable cookie parser
+app.use(cookieParser());
 
 // setup logger
 app.use(morgan("dev"));
