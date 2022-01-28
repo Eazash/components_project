@@ -1,4 +1,4 @@
-const User = require("../../config/database").User;
+const User = require("../config/database").User;
 
 module.exports.signupUser = function (req, res) {
 	const newUser = new User(req.body);
