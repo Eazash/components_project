@@ -128,3 +128,6 @@ yarn-error.log*
 
 # Vscode Configuration
 .vscode
+
+# Public Directory
+api/public/
