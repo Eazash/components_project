@@ -11,14 +11,17 @@ module.exports.signupUser = function (req, res) {
 					.status(400)
 					.json({ auth: false, message: "Email and Username already exists" });
 
-			newUser.save((err, doc) => {
+			newUser.save((err, user) => {
 				if (err) {
 					console.log(err);
 					return res.status(400).json({ success: false });
 				}
 				res.status(200).json({
 					success: true,
-					user: doc,
+					id: user._id,
+					username: user.username,
+					email: user.email,
+					createdAt: user.createdAt
 				});
 			});
 		}
@@ -55,6 +58,7 @@ module.exports.loginUser = function (req, res) {
 						res.cookie("auth", user.token).json({
 							isAuth: true,
 							id: user._id,
+							username: user.username,
 							email: user.email,
 						});
 					});
