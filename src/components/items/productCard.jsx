@@ -1,10 +1,15 @@
 import { Button, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import "./productCard.css";
 
-export default function ProductCard({product,postDelete}) {
-  const onDelete =id=>e => {
-    postDelete(id); 
+export default function ProductCard({ product, postDelete,updatePost }) {
+  const onDelete = (id) => (e) => {
+    postDelete(id);
   };
+  const onUpdate=(id,val)=>e=>{
+    updatePost(id,val);
+    console.log(id+val);
+  }
   return (
     <Card className="card" key={product.id}>
       <Card.Img
@@ -18,9 +23,16 @@ export default function ProductCard({product,postDelete}) {
         <Card.Text style={{ fontSize: "2rem", color: "blue" }}>
           {product.price}$
         </Card.Text>
-        <Button color="error" onClick={onDelete(product.id)}>
-          Delete
-        </Button>
+        <div className="button-container">
+          <Button color="error" onClick={onDelete(product.id)}>
+            Delete
+          </Button>
+          <Link to='/products/update'>
+            <Button color="error" onClick={onUpdate(product.id, `${product.name}`)}>
+              update
+            </Button>
+          </Link>
+        </div>
       </Card.Body>
     </Card>
   );
