@@ -16,11 +16,22 @@ function Items() {
   const postDelete =id=> {
     axios
       .delete(`https://61cebbc465c32600170c7ce8.mockapi.io/products/${id}`)
-      .then((res) => axios.get(`https://61cebbc465c32600170c7ce8.mockapi.io/products`).then((response) => {
+      .then(() => axios.get(url).then((response) => {
         setproducts(response.data);
       }))
       .catch((err) => console.log(err));
   };
+
+  // const postUpdate
+  const updatePost= async(id,val)=>{
+    console.log('from items'+id+val)
+    axios.put(`https://61cebbc465c32600170c7ce8.mockapi.io/products/${id}`,{name:val})
+    .then(() => axios.get(url).then((response) => {
+      setproducts(response.data);
+    }))
+    .catch((err) => console.log(err));
+
+  }
 
   if (products && products.length !== 0) {
     return (
@@ -30,7 +41,7 @@ function Items() {
           <Row xs={1} md={4} className="g-4">
             {products.map((product, idx) => (
               <Col key={idx}>
-                <ProductCard product={product} postDelete={postDelete}/>
+                <ProductCard product={product} postDelete={postDelete} updatePost={updatePost}/>
               </Col>
             ))}
           </Row>
