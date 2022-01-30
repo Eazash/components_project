@@ -1,11 +1,10 @@
 import { Button, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useStateValue } from "../../StateProvider";
 import "./productCard.css";
 
 export default function ProductCard({ product }) {
-  const [basket,dispatch]=useStateValue();
-  console.log('this is the basket>>>'+ basket);
+  const [state ,dispatch]=useStateValue();
+
   const addToBasket=()=>{
     dispatch({
       type:'ADD_TO_BASKET',
