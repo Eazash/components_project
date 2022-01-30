@@ -4,16 +4,15 @@ import "./variables.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { StateProvider } from "./StateProvider";
-import {initialState} from './reducer';
-import reducer from "./reducer";
+import { store } from "./store";
+import { Provider } from "react-redux";
 
 ReactDOM.render(
-  <BrowserRouter>
-  <StateProvider initialState={initialState} reducer={reducer }>
-    <App />
-    </StateProvider>
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );
 
