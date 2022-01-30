@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Card } from "react-bootstrap";
+import { useStateValue } from "../../StateProvider";
 import './checkout.css'
 
 function CheckoutList({item}) {
