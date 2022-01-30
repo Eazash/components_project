@@ -15,7 +15,9 @@ export default function ProductCard({ product }) {
         <Card.Text style={{ fontSize: "2rem", color: "blue" }}>
           {product.price}$
         </Card.Text>
-        <Button color='error'>Buy Now</Button>
+        <Link to='/checkout'>
+        <Button color='error' onClick={}>Buy Now</Button>
+        </Link>
       </Card.Body>
     </Card>
   );
