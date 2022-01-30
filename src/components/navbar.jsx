@@ -1,8 +1,11 @@
 import React from "react";
 import { Navbar, Container, Nav, Button, Badge } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { useStateValue } from "../StateProvider";
 
 export default function NavBar() {
+  const [{basket}]=useStateValue();
+
   return (
     <Navbar bg="secondary" variant="dark">
       <Container>
@@ -19,7 +22,7 @@ export default function NavBar() {
         </Nav>
         <Nav className="d-flex">
           <Button variant="light">
-            Cart <Badge bg="secondary">9</Badge>
+            Cart <Badge bg="secondary">{basket?.length}</Badge>
             <span className="visually-hidden">cart</span>
           </Button>
         </Nav>
