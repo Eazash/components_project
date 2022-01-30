@@ -2,14 +2,14 @@ import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./productCard.css";
 
-export default function ProductCard({ product, postDelete,updatePost }) {
+export default function ProductCard({ product, postDelete, updatePost }) {
   const onDelete = (id) => (e) => {
     postDelete(id);
   };
-  const onUpdate=(id,val)=>e=>{
-    updatePost(id,val);
-    console.log(id+val);
-  }
+  const onUpdate = (id, val) => (e) => {
+    updatePost(id, val);
+    console.log(id + val);
+  };
   return (
     <Card className="card" key={product.id}>
       <Card.Img
@@ -28,8 +28,11 @@ export default function ProductCard({ product, postDelete,updatePost }) {
             Delete
           </Button>
           {/* <Link to={location => ({ ...field, pathname: "/products/update/:${}" })}> */}
-          <Link to='/Products/update'>
-            <Button color="error" onClick={onUpdate(product.id, `${product.name}`)}>
+          <Link to="/Products/update">
+            <Button
+              color="error"
+              onClick={onUpdate(product.id, `${product.name}`)}
+            >
               update
             </Button>
           </Link>
