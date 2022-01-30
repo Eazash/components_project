@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: [],
@@ -24,5 +24,9 @@ export const productSlice = createSlice({
 });
 
 export const { addProduct, deleteProduct, setProducts } = productSlice.actions;
+export const getProducts = createSelector(
+  [(state) => state.products.value],
+  (products) => products
+);
 
 export default productSlice.reducer;

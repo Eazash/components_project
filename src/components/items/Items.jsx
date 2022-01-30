@@ -3,11 +3,15 @@ import { Row, Col } from "react-bootstrap";
 import axios from "axios";
 import ProductCard from "./productCard";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteProduct, setProducts } from "../../store/productSlice";
+import {
+  deleteProduct,
+  getProducts,
+  setProducts,
+} from "../../store/productSlice";
 
 function Items() {
   const url = "https://61cebbc465c32600170c7ce8.mockapi.io/products";
-  const products = useSelector((state) => state.products.value);
+  const products = useSelector(getProducts);
   const dispatch = useDispatch();
 
   useEffect(() => {
