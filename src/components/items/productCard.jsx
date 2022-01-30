@@ -27,7 +27,8 @@ export default function ProductCard({ product, postDelete,updatePost }) {
           <Button color="error" onClick={onDelete(product.id)}>
             Delete
           </Button>
-          <Link to={location => ({ ...field, pathname: "/products/update/:${}" })}>
+          {/* <Link to={location => ({ ...field, pathname: "/products/update/:${}" })}> */}
+          <Link to='/Products/update'>
             <Button color="error" onClick={onUpdate(product.id, `${product.name}`)}>
               update
             </Button>
