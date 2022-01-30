@@ -4,7 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useStateValue } from "../StateProvider";
 
 export default function NavBar() {
-  const [{basket}]=useStateValue();
+  const [{ basket }] = useStateValue();
 
   return (
     <Navbar bg="secondary" variant="dark">
@@ -21,10 +21,14 @@ export default function NavBar() {
           </LinkContainer>
         </Nav>
         <Nav className="d-flex">
-          <Button variant="light">
-            Cart <Badge bg="secondary">{basket?.length}</Badge>
-            <span className="visually-hidden">cart</span>
-          </Button>
+          <LinkContainer to="/checkout">
+            <Nav.Link>
+              <Button variant="light">
+                Cart <Badge bg="secondary">{basket?.length}</Badge>
+                <span className="visually-hidden">cart</span>
+              </Button>
+            </Nav.Link>
+          </LinkContainer>
         </Nav>
       </Container>
     </Navbar>
