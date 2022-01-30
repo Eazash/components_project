@@ -1,0 +1,21 @@
+.card {
+  border-radius: 30px;
+  border: 0.3px solid lightblue;
+}
+
+.card:hover {
+  border: none;
+  z-index: 3;
+  transition: all 0.3s ease-out;
+  box-shadow: 4px 6px 20px 6px rgba(56, 125, 255, 0.17);
+  -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+  filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
+}
+.card-layout {
+  display: flex;
+  flex-direction: row;
+}
+.card-container{
+    padding: 5rem;
+    border: 3px solid black;
+}
