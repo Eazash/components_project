@@ -13,7 +13,7 @@ export default function NavBar() {
           <LinkContainer to="/">
             <Nav.Link>Home</Nav.Link>
           </LinkContainer>
-          <LinkContainer to="/Products">
+          <LinkContainer to="/products">
             <Nav.Link>Products</Nav.Link>
           </LinkContainer>
         </Nav>

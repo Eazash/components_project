@@ -41,8 +41,8 @@ function Items() {
   }
   return (
     <>
-      <div>
-        <h2>no Products avaliable</h2>
+      <div style={{ margin: "3rem 8rem" }}>
+        <h2>No Products Available</h2>
       </div>
     </>
   );
