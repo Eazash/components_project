@@ -27,7 +27,6 @@ function Items() {
     return (
       <>
         <div style={{ margin: "3rem 8rem" }}>
-          <h1 style={{ marginBottom: "4rem" }}> Products Page</h1>
           <Row xs={1} md={4} className="g-4">
             {products.map((product, idx) => (
               <Col key={idx}>
