@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 import axios from "axios";
 import ProductCard from "./productCard";
@@ -27,7 +27,6 @@ function Items() {
     return (
       <>
         <div style={{ margin: "3rem 8rem" }}>
-          <h1 style={{ marginBottom: "4rem" }}> Products Page</h1>
           <Row xs={1} md={4} className="g-4">
             {products.map((product, idx) => (
               <Col key={idx}>
@@ -41,8 +40,8 @@ function Items() {
   }
   return (
     <>
-      <div>
-        <h2>no Products avaliable</h2>
+      <div style={{ margin: "3rem 8rem" }}>
+        <h2>No Products Available</h2>
       </div>
     </>
   );
