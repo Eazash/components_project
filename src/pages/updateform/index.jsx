@@ -1,79 +1,109 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
-import { Button } from "react-bootstrap";
-import { useState } from "react";
+import { Button, Spinner } from "react-bootstrap";
 import "./updateform.css";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 function UpdateForm() {
-  const [field, setField] = useState([
-    {
-      price: 0,
-      name: " ",
-      description: "",
-      imagelink: " ",
-    },
-  ]);
+  const params = useParams();
+  const [loading, setloading] = useState(true);
+  const [product, setProduct] = useState({});
+  const navigate = useNavigate();
+  useEffect(() => {
+    axios
+      .get(`https://61cebbc465c32600170c7ce8.mockapi.io/products/${params.id}`)
+      .then(({ data: product }) => {
+        setProduct(product);
+        setloading(false);
+      });
+  }, []);
+
   const submit = (e) => {
     e.preventDefault();
+    setloading(true);
+    axios
+      .put(
+        `https://61cebbc465c32600170c7ce8.mockapi.io/products/${params.id}`,
+        { ...product }
+      )
+      .then(({ data: updatedProduct }) => {
+        setloading(false);
+        navigate(-1);
+      });
   };
   const handleChange = (e) => {
-    console.log(e.target.name)
-    const values= [...field]
-    values[0][e.target.name]=e.target.value;
-    setField(values);
+    const name = e.target.name;
+    const newProduct = { ...product };
+    newProduct[name] = e.target.value;
+    setProduct(newProduct);
   };
-console.log(field)
+  const cancel = () => {
+    navigate(-1);
+    setloading(false);
+  };
   return (
     <div className="form-container">
-      <Form onSubmit={submit}>
-        <Form.Group className="mb-3" controlId="formprice">
-          <Form.Label>Price</Form.Label>
-          <Form.Control
-            name="price"
-            type="number"
-            placeholder="Add New Price"
-            value={field.price}
-            onChange={handleChange}
-          />
-        </Form.Group>
+      {loading ? (
+        <div className="d-flex justify-content-center align-items-center">
+          <Spinner animation="border" variant="primary"></Spinner>
+        </div>
+      ) : (
+        <Form onSubmit={submit}>
+          <Form.Group className="mb-3" controlId="formname">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              name="name"
+              value={product.name}
+              type="string"
+              placeholder="Add New Name"
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formname">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            name="name"
-            vlaue={field.name}
-            type="string"
-            placeholder="Add New Name"
-            onChange={handleChange}
-          />
-        </Form.Group>
+          <Form.Group className="mb-3" controlId="formprice">
+            <Form.Label>Price</Form.Label>
+            <Form.Control
+              name="price"
+              type="number"
+              placeholder="Add New Price"
+              value={product.price}
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formdescription">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            name="description"
-            value={field.description}
-            type="string"
-            placeholder="Add New Description"
-            onChange={handleChange}
-          />
-        </Form.Group>
+          <Form.Group className="mb-3" controlId="formdescription">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              name="description"
+              value={product.description}
+              type="string"
+              placeholder="Add New Description"
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formimagelink">
-          <Form.Label>Image Link</Form.Label>
-          <Form.Control
-            name="imagelink"
-            value={field.imagelink}
-            type="string"
-            placeholder="Add New Image Link"
-            onChange={handleChange}
-          />
-        </Form.Group>
+          <Form.Group className="mb-3" controlId="formimagelink">
+            <Form.Label>Image Link</Form.Label>
+            <Form.Control
+              name="imagelink"
+              value={product.image}
+              type="string"
+              placeholder="Add New Image Link"
+              onChange={handleChange}
+            />
+          </Form.Group>
 
-        <Button variant="primary" type="submit" onClick={submit}>
-          Submit
-        </Button>
-      </Form>
+          <div className="d-flex justify-content-between">
+            <Button variant="primary" type="submit" onClick={submit}>
+              Submit
+            </Button>
+            <Button variant="outline-primary" type="submit" onClick={submit}>
+              Cancel
+            </Button>
+          </div>
+        </Form>
+      )}
     </div>
   );
 }
