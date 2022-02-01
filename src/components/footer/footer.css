@@ -1,0 +1,48 @@
+.footer {
+	background-color: black;
+	position: static;
+	bottom: 0;
+	z-index: 1;
+	color: #ffffff;
+	overflow: hidden;
+	width: 100%;
+}
+
+.footer-container {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.footer-container > div {
+	margin: 20px 0px;
+}
+
+.footer-title {
+	margin-bottom: 10px;
+	font-weight: 800;
+	font-size: 20px;
+}
+
+.footer-all > p {
+	margin-bottom: 8px;
+}
+
+.footer-link {
+	color: white;
+	text-decoration: none;
+}
+
+.footer-link:visited {
+	color: white;
+	text-decoration: none;
+}
+
+.footer-link:hover {
+	color: white;
+	text-decoration: none;
+}
+
+.footer-link:active {
+	color: white;
+	text-decoration: none;
+}
