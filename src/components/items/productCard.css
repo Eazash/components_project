@@ -1,9 +1,9 @@
-.card {
+.product-card {
   border-radius: 30px;
   border: 0.3px solid lightblue;
 }
 
-.card:hover {
+.product-card:hover {
   top: -30px;
   border: none;
   z-index: 3;

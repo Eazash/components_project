@@ -6,7 +6,7 @@ export default function ProductCard(props) {
     props.postDelete(id); 
   };
   return (
-    <Card className="card" key={props.product.id}>
+    <Card className="product-card" key={props.product.id}>
       <Card.Img
         variant="top"
         src={props.product.image}
@@ -18,7 +18,7 @@ export default function ProductCard(props) {
         <Card.Text style={{ fontSize: "2rem", color: "blue" }}>
           {props.product.price}$
         </Card.Text>
-        <Button color="error" onClick={onDelete(props.product.id)}>
+        <Button color="error" className="rounded-pill" onClick={onDelete(props.product.id)}>
           Delete
         </Button>
       </Card.Body>

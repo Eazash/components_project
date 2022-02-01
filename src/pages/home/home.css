@@ -1,34 +1,53 @@
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.home {
+ 
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.home-image {
+	background-image: url("https://image.freepik.com/free-vector/add-cart-concept-illustration_114360-2521.jpg?w=740");
+	background-size: cover;
+	background-position: center center;
+	mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.home-container {
+	display: flex;
+}
+
+.home-title {
+  z-index: 10;
+	align-self: center;
+  padding-left: 35%;
+  color: black;
+}
+
+.home-row {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-left: 10px;
+  justify-content: space-around;
 }
 
-.App-link {
-  color: #61dafb;
+.home-card {
+  width: 95%;
+  border: none;
+  box-shadow: 4px 6px 20px 6px rgba(56, 125, 255, 0.17);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.home-link {
+	color: black;
+	text-decoration: none;
+}
+
+.home-link:visited {
+  color: black;
+	text-decoration: none;
+}
+
+.home-link:hover {
+	color: black;
+	text-decoration: none;
+}
+
+.home-link:active {
+	color: black;
+	text-decoration: none;
 }
