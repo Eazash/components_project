@@ -44,7 +44,7 @@ function Signup() {
 													type="password"
 													placeholder="Password"
 													required=""
-													class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
+													class="form-control rounded-pill border-0 shadow-sm px-4 text-warning"
 												/>
 											</div>
 											<div class="d-grid gap-2 mt-2">

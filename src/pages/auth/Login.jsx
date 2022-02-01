@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./auth.css";
 
 function Login() {
@@ -34,10 +35,15 @@ function Login() {
 													type="password"
 													placeholder="Password"
 													required=""
-													class="form-control rounded-pill border-0 shadow-sm px-4 text-primary"
+													class="form-control rounded-pill border-0 shadow-sm px-4 text-warning"
 												/>
 											</div>
-										
+											<div class="mb-3">
+												<p>
+													Don't have an account? Create one
+													<Link to="/signup" className="here-link"> here</Link>!
+												</p>
+											</div>
 											<div class="d-grid gap-2 mt-2">
 												<button
 													type="submit"

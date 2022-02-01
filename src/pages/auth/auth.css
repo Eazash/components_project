@@ -8,3 +8,23 @@
 	background-size: cover;
 	background-position: center center;
 }
+
+.here-link {
+	color: #ffc632;
+	text-decoration: none;
+}
+
+.here-link:visited {
+	color: #ffc632;
+	text-decoration: none;
+}
+
+.here-link:hover {
+	color: #ffc632;
+	text-decoration: none;
+}
+
+.here-link:active {
+	color: #ffc632;
+	text-decoration: none;
+}
