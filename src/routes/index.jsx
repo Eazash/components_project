@@ -5,17 +5,16 @@ import Items from "../components/items/Items";
 import Login from "../pages/auth/Login";
 import Signup from "../pages/auth/Signup";
 
-import WithNav from "./WithNav";
-import WithoutNav from "./WithoutNav";
+import { ShowNavAndFooter, HideNavAndFooter } from "./HideRoutes";
 
 function AllRoutes() {
 	return (
 		<Routes>
-			<Route element={<WithNav />}>
+			<Route element={<ShowNavAndFooter />}>
 				<Route path="/" element={<Home />} />
 				<Route path="/products" element={<Items />} />
 			</Route>
-			<Route element={<WithoutNav />}>
+			<Route element={<HideNavAndFooter />}>
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup />} />
 			</Route>
