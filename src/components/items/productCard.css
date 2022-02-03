@@ -1,9 +1,9 @@
-/* .card {
+.product-card {
   border-radius: 30px;
   border: 0.3px solid lightblue;
 }
 
-.card:hover {
+.product-card:hover {
   top: -30px;
   border: none;
   z-index: 3;
@@ -12,7 +12,7 @@
   -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
   filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
 }
-.card-layout{
+.card-layout {
   display: flex;
   flex-direction: row;
-} */
+}

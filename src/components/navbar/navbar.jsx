@@ -1,26 +1,29 @@
 import React from "react";
 import { Navbar, Container, Nav, Button, Badge } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
-import { useStateValue } from "../StateProvider";
+import { getBasket } from "../../store/basket";
 
 export default function NavBar() {
-  const [{ basket }] = useStateValue();
-
+  const basket = useSelector(getBasket);
   return (
-    <Navbar bg="secondary" variant="dark">
+    <Navbar bg="warning" className="navbar">
       <Container>
-        <Navbar.Brand href="#home" className=".align-middle">
-          Delala
-        </Navbar.Brand>
-        <Nav className="me-auto .align-middle">
+        <LinkContainer to="/">
+          <Navbar.Brand>UPSHOP</Navbar.Brand>
+        </LinkContainer>
+        <Nav>
           <LinkContainer to="/">
             <Nav.Link>Home</Nav.Link>
           </LinkContainer>
-          <LinkContainer to="/Products">
+          <LinkContainer to="/products">
             <Nav.Link>Products</Nav.Link>
           </LinkContainer>
         </Nav>
         <Nav className="d-flex">
+          <LinkContainer to="/login">
+            <Nav.Link>Log In</Nav.Link>
+          </LinkContainer>
           <LinkContainer to="/checkout">
             <Nav.Link>
               <Button variant="light">
