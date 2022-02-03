@@ -1,9 +1,23 @@
 import { Button, Card } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "../../store/basket";
 import "./productCard.css";
 
 export default function ProductCard(props) {
-  const onDelete =id=>e => {
-    props.postDelete(id); 
+  const dispatch = useDispatch();
+  const addProductToBasket = () => {
+    dispatch(
+      addToBasket({
+        id: props.product.id,
+        name: props.product.name,
+        image: props.product.image,
+        price: props.product.price,
+        description: props.product.description,
+      })
+    );
+  };
+  const onDelete = (id) => (e) => {
+    props.postDelete(id);
   };
   return (
     <Card className="product-card" key={props.product.id}>
@@ -18,7 +32,14 @@ export default function ProductCard(props) {
         <Card.Text style={{ fontSize: "2rem", color: "blue" }}>
           {props.product.price}$
         </Card.Text>
-        <Button color="error" className="rounded-pill" onClick={onDelete(props.product.id)}>
+        <Button color="error" onClick={addProductToBasket}>
+          Buy Now
+        </Button>
+        <Button
+          color="error"
+          className="rounded-pill"
+          onClick={onDelete(props.product.id)}
+        >
           Delete
         </Button>
       </Card.Body>
