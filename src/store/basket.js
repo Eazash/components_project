@@ -9,12 +9,13 @@ export const basketSlice = createSlice({
   initialState,
   reducers: {
     addToBasket: (state, action) => {
-      state.basket.push(action.payload);
+      state.value.push(action.payload);
     },
   },
 });
 
 export default basketSlice.reducer;
+export const { addToBasket } = basketSlice.actions;
 
 export const getBasket = createSelector(
   [(state) => state.basket.value],

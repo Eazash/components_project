@@ -1,21 +1,20 @@
 import { Button, Card } from "react-bootstrap";
-import { useStateValue } from "../../StateProvider";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "../../store/basket";
 import "./productCard.css";
 
 export default function ProductCard(props) {
-  const [state, dispatch] = useStateValue();
-
-  const addToBasket = () => {
-    dispatch({
-      type: "ADD_TO_BASKET",
-      item: {
+  const dispatch = useDispatch();
+  const addProductToBasket = () => {
+    dispatch(
+      addToBasket({
         id: props.product.id,
         name: props.product.name,
         image: props.product.image,
         price: props.product.price,
         description: props.product.description,
-      },
-    });
+      })
+    );
   };
   const onDelete = (id) => (e) => {
     props.postDelete(id);
@@ -33,7 +32,7 @@ export default function ProductCard(props) {
         <Card.Text style={{ fontSize: "2rem", color: "blue" }}>
           {props.product.price}$
         </Card.Text>
-        <Button color="error" onClick={addToBasket}>
+        <Button color="error" onClick={addProductToBasket}>
           Buy Now
         </Button>
         <Button
