@@ -1,13 +1,13 @@
 import React from "react";
-import { useStateValue } from "../../StateProvider";
 import CheckoutList from "./checkoutlist";
 import { Row, Col } from "react-bootstrap";
 import "./checkout.css";
-import { getBasketTotal } from "../../reducer";
+import { getBasket, getBasketTotal } from "../../store/basket";
+import { useSelector } from "react-redux";
 
 function Checkout() {
-  const [{ basket }] = useStateValue();
-  let value=getBasketTotal(basket);
+  const basket = useSelector(getBasket);
+  const value = useSelector(getBasketTotal);
   return (
     <>
       <Row xs={1} md={1} className="g-4">
