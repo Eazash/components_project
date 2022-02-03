@@ -12,9 +12,9 @@ function Checkout() {
     <>
       <Row xs={1} md={1} className="g-4">
         {basket.map((item, idx) => (
-          <Col>
+          <Col key={item.id}>
             <div>
-              <CheckoutList item={item} key={idx} />
+              <CheckoutList item={item} />
             </div>
           </Col>
         ))}

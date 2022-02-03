@@ -1,8 +1,14 @@
 import React from "react";
 import { Button, Card } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { removeFromBasket } from "../../store/basket";
 import "./checkout.css";
 
 function CheckoutList({ item }) {
+  const dispatch = useDispatch();
+  const removeItemCard = () => {
+    dispatch(removeFromBasket({ id: item.id }));
+  };
   return (
     <div>
       <Card className="card" key={item.id} style={{ margin: "0" }}>
@@ -19,7 +25,7 @@ function CheckoutList({ item }) {
               {item.price}$
             </Card.Text>
           </Card.Body>
-          <Button>Delete</Button>
+          <Button onClick={removeItemCard}>Delete</Button>
         </div>
       </Card>
     </div>
