@@ -16,7 +16,7 @@ export const authSlice = createSlice({
       state.id = id;
       state.email = email;
       state.username = username;
-      state.isAdmin = isAdmin;
+      state.isAdmin = isAdmin !== undefined && isAdmin;
     },
   },
 });
