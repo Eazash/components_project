@@ -6,9 +6,10 @@ import { setProducts } from "../../store/productSlice";
 import axios from "axios";
 import { LinkContainer } from "react-router-bootstrap";
 import { Nav, Container, Row } from "react-bootstrap";
+import { api_url } from "../../config";
 
 export default function Home() {
-  const url = "https://61cebbc465c32600170c7ce8.mockapi.io/products";
+  const url = `${api_url}/products`;
   const products = useSelector((state) => state.products.value);
   const dispatch = useDispatch();
 

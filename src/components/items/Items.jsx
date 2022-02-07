@@ -8,21 +8,21 @@ import {
   getProducts,
   setProducts,
 } from "../../store/productSlice";
+import { api_url } from "../../config";
 
 function Items() {
-  const url = "https://61cebbc465c32600170c7ce8.mockapi.io/products";
   const products = useSelector(getProducts);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios.get(url).then((response) => {
+    axios.get(`${api_url}/products`).then((response) => {
       dispatch(setProducts(response.data));
     });
-  }, [url]);
+  }, []);
 
   const postDelete = (id) => {
     axios
-      .delete(`https://61cebbc465c32600170c7ce8.mockapi.io/products/${id}`)
+      .delete(`${api_url}/products/${id}`)
       .then((res) => dispatch(deleteProduct({ id })))
       .catch((err) => console.log(err));
   };

@@ -55,3 +55,8 @@ export const getUsers = createSelector(
   [(state) => state.auth.users],
   (users) => users
 );
+
+export const getUser = createSelector(
+  [(state) => state.auth.value],
+  (user) => user
+);

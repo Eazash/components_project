@@ -3,7 +3,12 @@ import { Navbar, Container, Nav, Button, Badge } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { getBasket } from "../../store/basket";
-import { isAdmin, isLoggedIn, removeUser } from "../../store/authSlice";
+import {
+  getUser,
+  isAdmin,
+  isLoggedIn,
+  removeUser,
+} from "../../store/authSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +16,7 @@ export default function NavBar() {
   const basket = useSelector(getBasket);
   const loggedIn = useSelector(isLoggedIn);
   const admin = useSelector(isAdmin);
+  const user = useSelector(getUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -45,9 +51,14 @@ export default function NavBar() {
               </Nav.Link>
             </LinkContainer>
           ) : (
-            <Nav.Link onClick={logout}>
-              <Button variant="light">Log Out</Button>
-            </Nav.Link>
+            <>
+              <Nav.Link>
+                <span className="h3 text-white">{user.username}</span>
+              </Nav.Link>
+              <Nav.Link onClick={logout}>
+                <Button variant="light">Log Out</Button>
+              </Nav.Link>
+            </>
           )}
           <LinkContainer to="/checkout">
             <Nav.Link>
