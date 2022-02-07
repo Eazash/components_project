@@ -7,9 +7,9 @@ import Checkout from "../components/checkout";
 import NavBar from "../components/navbar/navbar";
 import Footer from "../components/footer/Footer";
 import { useSelector } from "react-redux";
-import { isLoggedIn } from "../store/authSlice";
+import { isAdmin, isLoggedIn } from "../store/authSlice";
 import Products from "../pages/products/Products";
-import { Redirect } from "react-router-dom";
+import Users from "../pages/users";
 
 function AllRoutes() {
   return (
@@ -49,6 +49,14 @@ function AllRoutes() {
             </SkipAuth>
           }
         />
+        <Route
+          path="/users"
+          element={
+            <AdminOnly>
+              <Users />
+            </AdminOnly>
+          }
+        />
       </Routes>
       <Footer />
     </>
@@ -63,5 +71,10 @@ function RequireAuth({ children, redirectTo }) {
 function SkipAuth({ children }) {
   let isAuthenticated = useSelector(isLoggedIn);
   return isAuthenticated ? <Navigate to="/" /> : children;
+}
+
+function AdminOnly({ children }) {
+  let admin = useSelector(isAdmin);
+  return admin ? children : <Navigate to="/" />;
 }
 export default AllRoutes;

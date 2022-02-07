@@ -22,6 +22,7 @@ module.exports.signupUser = function (req, res) {
           username: user.username,
           email: user.email,
           createdAt: user.createdAt,
+          isAdmin: user.isAdmin,
         });
       });
     }
@@ -61,6 +62,7 @@ module.exports.loginUser = async function (req, res) {
       id: user._id,
       username: user.username,
       email: user.email,
+      isAdmin: user.isAdmin,
     });
   });
 };
