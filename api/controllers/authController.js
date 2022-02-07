@@ -28,43 +28,40 @@ module.exports.signupUser = function (req, res) {
   );
 };
 
-module.exports.loginUser = function (req, res) {
+module.exports.loginUser = async function (req, res) {
   let token = req.cookies.auth;
-
-  User.findByToken(token, (err, user) => {
-    if (err) return res(err);
-    if (user) {
+  if (token !== undefined) {
+    const user = await User.findByToken(token);
+    if (user)
       return res.status(400).json({
         error: true,
         message: "You are already logged in.",
       });
-    } else {
-      User.findOne({ username: req.body.username }, function (err, user) {
-        if (!user)
-          return res.status(401).json({
-            isAuth: false,
-            message: "Username or Password Incorrect",
-          });
-
-        user.comparePassword(req.body.password, (err, isMatch) => {
-          if (!isMatch)
-            return res.status(401).json({
-              isAuth: false,
-              message: "Username or Password Incorrect",
-            });
-
-          user.generateToken((err, user) => {
-            if (err) return res.status(400).send(err);
-            res.cookie("auth", user.token).json({
-              isAuth: true,
-              id: user._id,
-              username: user.username,
-              email: user.email,
-            });
-          });
-        });
-      });
-    }
+  }
+  const user = await User.findOne({
+    $or: [{ username: req.body.email }, { email: req.body.email }],
+  });
+  console.log(req.body);
+  if (user === null)
+    return res.status(401).json({
+      isAuth: false,
+      message: "Username or Password Incorrect",
+    });
+  const hasPassword = await user.hasPassword(req.body.password);
+  if (!hasPassword) {
+    return res.status(401).json({
+      error: true,
+      message: "You are already logged in.",
+    });
+  }
+  user.generateToken((err, user) => {
+    if (err) return res.status(400).send(err);
+    res.cookie("auth", user.token).json({
+      isAuth: true,
+      id: user._id,
+      username: user.username,
+      email: user.email,
+    });
   });
 };
 
