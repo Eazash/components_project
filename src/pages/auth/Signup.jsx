@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Alert } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { api_url } from "../../config";
 import { saveUser } from "../../store/authSlice";
 import "./auth.css";
@@ -15,6 +15,7 @@ function Signup() {
   const [error, setError] = useState({});
   const [isErrored, setIsErrored] = useState(false);
   const dipatch = useDispatch();
+  const navigate = useNavigate();
 
   async function signup() {
     await setLoading(true);
@@ -25,6 +26,7 @@ function Signup() {
         password,
       });
       dipatch(saveUser(user));
+      navigate("/");
     } catch (error) {
       if (error.response) {
         setError(error.response.data);

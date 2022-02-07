@@ -3,9 +3,20 @@ import { Navbar, Container, Nav, Button, Badge } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { getBasket } from "../../store/basket";
+import { isLoggedIn, removeUser } from "../../store/authSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
   const basket = useSelector(getBasket);
+  const loggedIn = useSelector(isLoggedIn);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  function logout() {
+    dispatch(removeUser());
+    navigate("/");
+  }
   return (
     <Navbar bg="warning" className="navbar">
       <Container>
@@ -21,9 +32,17 @@ export default function NavBar() {
           </LinkContainer>
         </Nav>
         <Nav className="d-flex">
-          <LinkContainer to="/login">
-            <Nav.Link>Log In</Nav.Link>
-          </LinkContainer>
+          {!loggedIn ? (
+            <LinkContainer to="/login">
+              <Nav.Link>
+                <Button variant="light">Log In</Button>
+              </Nav.Link>
+            </LinkContainer>
+          ) : (
+            <Nav.Link onClick={logout}>
+              <Button variant="light">Log Out</Button>
+            </Nav.Link>
+          )}
           <LinkContainer to="/checkout">
             <Nav.Link>
               <Button variant="light">

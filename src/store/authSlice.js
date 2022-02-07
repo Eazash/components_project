@@ -1,10 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  id: null,
-  email: null,
-  username: null,
-  isAdmin: false,
+  value: { id: null, email: null, username: null, isAdmin: false },
 };
 
 export const authSlice = createSlice({
@@ -13,14 +10,33 @@ export const authSlice = createSlice({
   reducers: {
     saveUser: (state, action) => {
       const { id, email, username, isAdmin } = action.payload;
-      state.id = id;
-      state.email = email;
-      state.username = username;
-      state.isAdmin = isAdmin !== undefined && isAdmin;
+      state.value = {
+        id,
+        email,
+        username,
+        isAdmin: isAdmin !== undefined && isAdmin,
+      };
+    },
+    removeUser: (state, action) => {
+      state.value = {
+        id: "",
+        email: "",
+        username: "",
+        isAdmin: "",
+      };
     },
   },
 });
 
-export const { saveUser } = authSlice.actions;
+export const { saveUser, removeUser } = authSlice.actions;
 
 export default authSlice.reducer;
+
+export const isLoggedIn = createSelector(
+  [
+    (state) => {
+      return state.auth.value;
+    },
+  ],
+  (user) => user.id !== null && user.id !== ""
+);

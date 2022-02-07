@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import { api_url } from "../../config";
 import "./auth.css";
@@ -14,6 +14,7 @@ function Login() {
   const [error, setError] = useState({});
   const [isErrored, setIsErrored] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   async function login() {
     await setLoading(true);
@@ -23,6 +24,7 @@ function Login() {
         password,
       });
       dispatch(saveUser(user));
+      navigate("/");
     } catch (error) {
       if (error.response) {
         setError(error.response.data);
