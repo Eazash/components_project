@@ -1,10 +1,13 @@
 import { Button, Card } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
+import { isAdmin } from "../../store/authSlice";
 import { addToBasket } from "../../store/basket";
 import "./productCard.css";
 
 export default function ProductCard(props) {
   const dispatch = useDispatch();
+  const admin = useSelector(isAdmin);
   const addProductToBasket = () => {
     dispatch(
       addToBasket({
@@ -35,13 +38,15 @@ export default function ProductCard(props) {
         <Button color="error" onClick={addProductToBasket}>
           Buy Now
         </Button>
-        <Button
-          color="error"
-          className="rounded-pill"
-          onClick={onDelete(props.product.id)}
-        >
-          Delete
-        </Button>
+        {admin ? (
+          <Button
+            color="error"
+            className="rounded-pill"
+            onClick={onDelete(props.product.id)}
+          >
+            Delete
+          </Button>
+        ) : null}
       </Card.Body>
     </Card>
   );

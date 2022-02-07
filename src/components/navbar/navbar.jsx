@@ -3,13 +3,14 @@ import { Navbar, Container, Nav, Button, Badge } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { LinkContainer } from "react-router-bootstrap";
 import { getBasket } from "../../store/basket";
-import { isLoggedIn, removeUser } from "../../store/authSlice";
+import { isAdmin, isLoggedIn, removeUser } from "../../store/authSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function NavBar() {
   const basket = useSelector(getBasket);
   const loggedIn = useSelector(isLoggedIn);
+  const admin = useSelector(isAdmin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -30,6 +31,11 @@ export default function NavBar() {
           <LinkContainer to="/products">
             <Nav.Link>Products</Nav.Link>
           </LinkContainer>
+          {admin ? (
+            <LinkContainer to="/users">
+              <Nav.Link>Users</Nav.Link>
+            </LinkContainer>
+          ) : null}
         </Nav>
         <Nav className="d-flex">
           {!loggedIn ? (
